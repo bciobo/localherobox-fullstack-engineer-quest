@@ -47,15 +47,15 @@ The overall user flow of the frontend should be similar to the following:
 
 ### Screen 1
 The user should be able to enter their email address into a form to request a list of all their orders.
-![alt](./img/task-screen-1.png)
+![./img/task-screen-1.png](./img/task-screen-1.png)
 
 ### Screen 2
 After submitting the form, the user will be presented with a list of all their orders, the delivery address of that order and the articles of the order.
-![alt](./img/task-screen-2.png)
+![./img/task-screen-1.png](./img/task-screen-2.png)
 
 ### Screen 3
 If the user chooses to click on one of the presented orders in the list, they will be presented with a detailed view of the order, including campaign and article information.
-![alt](./img/task-screen-3.png)
+![./img/task-screen-1.png](./img/task-screen-3.png)
 
 > ☝ Above mockups are just an inspiration. The final design and what you want to display to the user is up to you - do not overdo it - we just want to see how you tackle the task and what your coding style is like 😏
 
