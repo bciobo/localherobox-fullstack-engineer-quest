@@ -2,12 +2,12 @@
 ![header img](./img/5cg1mm.jpg)
 Welcome to the lost Fullstack Engineer Repository.
 You've probably come a long way - join me around the campfire, make yourself a coffee and take a break - before you start your quest.  
-Take your time and read this Markdown parchment carefully, it will help you on your mission to become a Fullstack Engineer at parcelLab.
+Take your time and read this markdown parchment carefully, it will help you on your mission to become a Fullstack Engineer at LocalHeroBox.
 
 ## Scenario
-At LocalHeroBox we integrate with a variety of marketing, sales & HR tools. One of the more common tasks for us is to process those different data sources, analyse and combine them and serve them to one our users in a human readable and convenient way.
+At LocalHeroBox we integrate with a variety of marketing, sales & HR-tools. One of the more common tasks for us is to process those different data sources, analyse and combine them and serve them to one our users in a human readable and convenient way.
 
-In this scenario, you are developer at LocalHeroBox and you are tasked with building a website that displays the orders and their tracking status for a specific user. Therefore you will need to build a frontend that presents this data to the user and a backend that serves the data to the frontend.
+In this scenario, you are developer at LocalHeroBox and you are tasked with building a website that displays the orders, included campaigns and their articles for a specific user. Therefore you will need to build a frontend that presents this data to the user and a backend that serves the data to the frontend.
 
 ## Our Expectations
 You might be wondering after reading the below scenario, how much effort and time we expect you to invest in this task. We know that you likely have a job, a life, further open job applications and other things that require some of your valuable time. Therefore you should **not** **spend more than** **3-4 hours** on this task. 
@@ -50,11 +50,11 @@ The user should be able to enter their email address into a form to request a li
 ![alt](./img/task-screen-1.png)
 
 ### Screen 2
-After submitting the form, the user will be presented with a list of all their orders, the delivery address of that order and the products of the order.
+After submitting the form, the user will be presented with a list of all their orders, the delivery address of that order and the articles of the order.
 ![alt](./img/task-screen-2.png)
 
 ### Screen 3
-If the user chooses to click on one of the presented orders in the list, they will be presented with a detailed view of the order, including tracking and article information.
+If the user chooses to click on one of the presented orders in the list, they will be presented with a detailed view of the order, including campaign and article information.
 ![alt](./img/task-screen-3.png)
 
 > ☝ Above mockups are just an inspiration. The final design and what you want to display to the user is up to you - do not overdo it - we just want to see how you tackle the task and what your coding style is like 😏
@@ -62,50 +62,44 @@ If the user chooses to click on one of the presented orders in the list, they wi
 ## Backend part
 The data that the frontend is displaying needs to be served by some sort of API. The design of that API is completely up to you. Feel free to decide on the type of API (REST, SOAP, GraphQL, freestyle), endpoints, request and response types. Use what you feel most comfortable with or what you think is best suited for this kind of scenario.
 
-At parcelLab we often need to handle a great amount of unconventional file types that are provided to us by customers and couriers. Unfortunately in this case your API will also need to handle a rather uncommon file format, which needs to be processed so it can be served to the frontend. Again it's your choice how to parse and process the file. For sake of simplicity you do not need to create a database to store the data in, you can choose to read and process straight from the file instead.
-
 ## Data Sources
 > ☝ Please do **not** edit the content of the below files. It's up to you, how or what information you want to store in your API, but do read the files as they are without modifying them first.
 
-- [data/trackings.csv](./data/trackings.csv)
-- [data/checkpoints.csv](./data/checkpoints.csv)
+- [data/recipients.csv](./data/recipients.csv)
+- [data/campaigns.csv](./data/campaigns.csv)
 
-### trackings.csv
-The online retailer parcelFashion, has provided us with a CSV that contains order details of their only and most valued customer - our CTO Julian 🙂
+### recipients.csv
+The SaaS Startup LocalTest-Startup, has provided us with a CSV that contains recipient details of their only and most valued customer - our CEO Sebastian 🙂
 
-If you open the `trackings.csv` file you will see it contains multiple entries with following properties:
+If you open the `recipients.csv` file you will see it contains multiple entries with following properties:
 
 - `orderNo` - the order number of one of the orders that Julian submitted
-- `tracking_number` - the courier tracking number that is used to ship the order to the recipient
-- `courier` - the name of the courier that fulfils the shipment
 - `street` - the street and house number of the recipient
 - `zip_code` - the ZIP / postal code of the recipient
 - `city` - the city of the recipient
 - `destination_country_iso3` - the ISO3 country code of the recipient
 - `email` - the email address of the recipient
-- `articleNo` - the online shop's article number of the article that is being shipped to the recipient
-- `articleImageUrl` - a picture URL of the article
-- `quantity` - the quantity of the article
-- `product_name` - the name of the article
+- `campaignId` - the Id of the campaign, that should be send
+- `orderStatus` - the initial order status of this order
 
-### checkpoints.csv
-In addition to the parcelFashion order information, we've been provided with tracking status updates, so called checkpoints, by the courier of the orders' trackings. Fortunately they are in the same file format as the `trackings.csv`. 
+### campaigns.csv
+In addition to the recipient details, LocalTest-Startup has created some campaigns that should be triggered and send to the recipients. Fortunately they are in the same file format as the `recipients.csv`. 
 
-If you open the `checkpoints.csv` file you will see it contains multiple entries. Each entry represents a checkpoint of the specified tracking. If a tracking number has multiple entries, then this means the courier has had multiple checkpoints for that specific trackings. You can find out which one of the status updates is the most recent one by looking at the specified timestamps. 
+If you open the `campaigns.csv` file you will see it contains multiple entries. Each entry represents a article of the specified campaign. If a campaign has multiple entries, then this means the campaign includes multiple articles for that specific campaign. 
 
 Each row will contain the following properties:
 
-- `tracking_number` - the courier tracking number that identifies a single shipment
-- `location` - a place name that specifies where the checkpoint occurred
-- `timestamp` - a UTC timestamp that specifies when the checkpoint occurred
-- `status` - a short code that describes the checkpoint's status
-- `status_text` - a more human readable version of the status short code
-- `status_detail` - a more human readable detailed version of the checkpoint's status
+- `campaignId` - the Id of the campaign, that should be send and identifies the campaign in the LocalHeroBox system
+- `articleNo` - the LocalHeroBox article number of the article that is being shipped to the recipient
+- `articleImageUrl` - a picture URL of the article
+- `quantity` - the quantity of the article within the campaign
+- `product_name` - the name of the article
+- `warehouse` - the location of the warehouse where the article is stored
 
 ## What you will need
 For setting up the website / frontend you can just set up a standard React/Vue/Svelte... project with the transpiler of your choice or don't use any framework at all. Choose the tool you like. (Hint - we are fans of functional programming and react hooks 😏)
 
-For the backend you can also use a programming language or framework of your choice. At parcelLab we're mostly using Node.js and Python, but ultimately use what you're most comfortable with. 
+For the backend you can also use a programming language or framework of your choice. At LocalheroBox we're mostly using Node.js and Python, but ultimately use what you're most comfortable with. 
 
 If you're done with this challenge, simply send us a link to a repository that we can access - or create a PR to this repository. 
 
