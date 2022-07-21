@@ -1,0 +1,4 @@
+orderNo;street;zip_code;city;destination_country_iso3;email;campaignId;orderStatus
+#3422;Zeppelinstraße 83;80336;München;DEU;sebastian@localherobox.de;17283997;Order processed
+#2453;Zeppelinstraße 67;80336;München;DEU;sebastian@localherobox.de;37862993;Order processed
+#5424;Atelierstraße 29;10625;Berlin;DEU;sebastian@localherobox.de;23872387;Order processed
