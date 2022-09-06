@@ -55,5 +55,8 @@ install: ensure-poetry clean
 run: ensure-poetry clean
 	poetry run  uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
 
-docker-image: ensure-poetry clean
+docker-image:
 	docker build -t lhb-backend:0.1.0 . --no-cache
+
+start-db:
+	docker-compose -f ../docker-compose.yml up -d db
