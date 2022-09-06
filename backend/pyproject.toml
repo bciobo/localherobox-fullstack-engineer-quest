@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "moz-support"
+name = "backend"
 version = "0.1.0"
 description = ""
 authors = ["Bogdan Ciobotaru (bciobo) <bogdan.ciobotaru1@gmail.com>"]
