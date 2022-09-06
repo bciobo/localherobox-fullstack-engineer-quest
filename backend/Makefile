@@ -1,4 +1,4 @@
-.PHONY: test mypy lint clean dev install dist run help
+.PHONY: test mypy lint clean dev install dist run docker-image start-db help
 
 
 help:
@@ -12,6 +12,8 @@ help:
 	@echo "  install       install without dev dependencies"
 	@echo "  dist          build dist packages"
 	@echo "  run           run server for development"
+	@echo "  docker-image  build Docker image"
+	@echo "  start-db      run PostgreSQL in a Docker container"
 	@echo "  help          print this message"
 	@echo
 
@@ -52,3 +54,6 @@ install: ensure-poetry clean
 
 run: ensure-poetry clean
 	poetry run  uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
+
+docker-image: ensure-poetry clean
+	docker build -t lhb-backend:0.1.0 . --no-cache
