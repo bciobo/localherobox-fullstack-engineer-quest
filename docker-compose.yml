@@ -3,13 +3,14 @@ version: "3.9"
 services:
   db:
     container_name: lhb-backend-db
-    image: postgres:12
+    image: postgres:latest
     restart: always
     volumes:
       - ./docker/postgres-setup:/docker-entrypoint-initdb.d
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: example
+      POSTGRES_DB: lhb
     ports:
       - 5432:5432
     networks:
@@ -23,6 +24,7 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=example
+      - POSTGRES_DB=lhb
     ports:
       - 8000:8000
     networks:
