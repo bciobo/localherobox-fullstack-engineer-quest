@@ -4,10 +4,10 @@ import csv
 import os
 import typer
 
-import models
-from database import engine, SessionLocal
+from .. import models
+from ..database import engine, SessionLocal
 
-DATA_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', '..', 'data'))
+DATA_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'data'))
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"

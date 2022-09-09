@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, text
 from sqlalchemy.dialects.postgresql import UUID
 
-from database import Base
+from .database import Base
 
 
 class Campaign(Base):
@@ -18,12 +18,7 @@ class Campaign(Base):
 
 
 class Recipient(Base):
-    """SQLAlchemy data model class for recipients to interact with DB
-
-    When accessing the attribute "campaign" in a Recipient, it will contain a Campaign
-    SQLAlchemy model from the campaigns table. It will use the campaign_id attribute/column
-    with its foreign key to know which record to get from the campaigns table.
-    """
+    """SQLAlchemy data model class for recipients to interact with DB"""
     __tablename__ = 'recipients'
 
     id = Column(UUID(as_uuid=True), server_default=text("gen_random_uuid()"), primary_key=True)

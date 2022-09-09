@@ -63,4 +63,4 @@ start-db:
 	docker-compose -f ../docker-compose.yml up -d db
 
 import-csv:
-	python src/csv_importer.py
+	python -m src.cmd.csv_importer
