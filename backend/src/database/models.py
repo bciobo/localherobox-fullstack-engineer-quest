@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, text
 from sqlalchemy.dialects.postgresql import UUID
 
-from .database import Base
+from . import Base
 
 
 class Campaign(Base):

@@ -4,8 +4,7 @@ import csv
 import os
 import typer
 
-from .. import models
-from ..database import engine, SessionLocal
+from ..database import engine, SessionLocal, models
 
 DATA_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'data'))
 
