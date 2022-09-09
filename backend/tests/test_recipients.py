@@ -48,6 +48,16 @@ def test_get_order_by_id(): # noqa
     assert order['destination_country_iso3'] == 'DEU'
     assert order['campaign_id'] == '12345678'
     assert order['order_status'] == 'Order processed'
+    articles = order['articles']
+    assert len(articles) > 0
+    first_article = articles[0]
+    assert first_article['campaign_id'] == '12345678'
+    assert first_article['article_no'] == 'A-B2-U'
+    assert first_article['article_image_url'] == 'https://cdn.com/image.png'
+    assert first_article['quantity'] == 1
+    assert first_article['product_name'] == 'T-shirt'
+    assert first_article['warehouse'] == 'Munich'
+
 
 
 def test_get_order_for_unknown_id(): # noqa
