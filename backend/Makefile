@@ -1,4 +1,4 @@
-.PHONY: test mypy lint clean dev install dist run docker-image start-db help
+.PHONY: test mypy lint clean dev install dist run docker-image start-db import-csv help
 
 
 help:
@@ -14,6 +14,7 @@ help:
 	@echo "  run           run server for development"
 	@echo "  docker-image  build Docker image"
 	@echo "  start-db      run PostgreSQL in a Docker container"
+	@echo "  import-csv    import csv data into db"
 	@echo "  help          print this message"
 	@echo
 
@@ -60,3 +61,6 @@ docker-image:
 
 start-db:
 	docker-compose -f ../docker-compose.yml up -d db
+
+import-csv:
+	python src/csv_importer.py
