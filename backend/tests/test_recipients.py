@@ -7,48 +7,48 @@ from backend.src.main import app
 client = TestClient(app)
 
 
-def test_get_all_orders(): # noqa
-    response = client.get('/orders/')
+def test_get_all_recipients():  # noqa
+    response = client.get('/recipients/')
     assert response.status_code == 200
-    orders = response.json()
-    assert len(orders) > 0
+    recipients = response.json()
+    assert len(recipients) > 0
 
 
-def test_get_orders_for_email(): # noqa
-    response = client.get('/orders/?email=test@email.com')
+def test_get_recipients_for_email():  # noqa
+    response = client.get('/recipients/?email=test@email.com')
     assert response.status_code == 200
-    orders = response.json()
-    first_order = orders[0]
-    assert first_order['email'] == 'test@email.com'
-    assert first_order['order_number'] == '1111'
-    assert first_order['street'] == 'Strasse 1'
-    assert first_order['zip_code'] == '12345'
-    assert first_order['city'] == 'Berlin'
-    assert first_order['destination_country_iso3'] == 'DEU'
-    assert first_order['campaign_id'] == '12345678'
-    assert first_order['order_status'] == 'Order processed'
+    recipients = response.json()
+    first_recipient = recipients[0]
+    assert first_recipient['email'] == 'test@email.com'
+    assert first_recipient['order_number'] == '1111'
+    assert first_recipient['street'] == 'Strasse 1'
+    assert first_recipient['zip_code'] == '12345'
+    assert first_recipient['city'] == 'Berlin'
+    assert first_recipient['destination_country_iso3'] == 'DEU'
+    assert first_recipient['campaign_id'] == '12345678'
+    assert first_recipient['order_status'] == 'Order processed'
 
 
-def test_get_orders_for_unknown_email(): # noqa
+def test_get_recipients_for_unknown_email():  # noqa
     email_address = 'unknown@email.com'
-    response = client.get('/orders/?email=%s' % email_address)
+    response = client.get('/recipients/?email=%s' % email_address)
     assert response.status_code == 404
-    assert response.json() == {'message': 'No orders found for email: %s' % email_address} # noqa
+    assert response.json() == {'message': 'No recipients found for email: %s' % email_address}  # noqa
 
 
-def test_get_order_by_id(): # noqa
-    response = client.get('/orders/1234')
+def test_get_recipient_by_id():  # noqa
+    response = client.get('/recipients/1234')
     assert response.status_code == 200
-    order = response.json()
-    assert order['order_number'] == '1234'
-    assert order['email'] == 'test@email.com'
-    assert order['street'] == 'Strasse 1'
-    assert order['zip_code'] == '12345'
-    assert order['city'] == 'Berlin'
-    assert order['destination_country_iso3'] == 'DEU'
-    assert order['campaign_id'] == '12345678'
-    assert order['order_status'] == 'Order processed'
-    articles = order['articles']
+    recipient = response.json()
+    assert recipient['order_number'] == '1234'
+    assert recipient['email'] == 'test@email.com'
+    assert recipient['street'] == 'Strasse 1'
+    assert recipient['zip_code'] == '12345'
+    assert recipient['city'] == 'Berlin'
+    assert recipient['destination_country_iso3'] == 'DEU'
+    assert recipient['campaign_id'] == '12345678'
+    assert recipient['order_status'] == 'Order processed'
+    articles = recipient['articles']
     assert len(articles) > 0
     first_article = articles[0]
     assert first_article['campaign_id'] == '12345678'
@@ -59,9 +59,8 @@ def test_get_order_by_id(): # noqa
     assert first_article['warehouse'] == 'Munich'
 
 
-
-def test_get_order_for_unknown_id(): # noqa
-    order_number = 9999
-    response = client.get('/orders/%i' % order_number)
+def test_get_recipient_for_unknown_id():  # noqa
+    recipient_id = 9999
+    response = client.get('/recipients/%i' % recipient_id)
     assert response.status_code == 404
-    assert response.json() == {'message': 'No order found with number: #%i' % order_number} # noqa
+    assert response.json() == {'message': 'No recipient found with number: #%i' % recipient_id}  # noqa
