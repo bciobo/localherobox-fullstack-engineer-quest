@@ -1,3 +1,5 @@
+"""lhb-backend.tests.test_recipients."""
+
 from fastapi.testclient import TestClient
 
 from backend.src.main import app
@@ -5,14 +7,14 @@ from backend.src.main import app
 client = TestClient(app)
 
 
-def test_get_all_orders():
+def test_get_all_orders(): # noqa
     response = client.get('/orders/')
     assert response.status_code == 200
     orders = response.json()
     assert len(orders) > 0
 
 
-def test_get_orders_for_email():
+def test_get_orders_for_email(): # noqa
     response = client.get('/orders/?email=test@email.com')
     assert response.status_code == 200
     orders = response.json()
@@ -27,14 +29,14 @@ def test_get_orders_for_email():
     assert first_order['order_status'] == 'Order processed'
 
 
-def test_get_orders_for_unknown_email():
+def test_get_orders_for_unknown_email(): # noqa
     email_address = 'unknown@email.com'
     response = client.get('/orders/?email=%s' % email_address)
     assert response.status_code == 404
-    assert response.json() == {'message': 'No orders found for email: %s' % email_address}
+    assert response.json() == {'message': 'No orders found for email: %s' % email_address} # noqa
 
 
-def test_get_order_by_id():
+def test_get_order_by_id(): # noqa
     response = client.get('/orders/1234')
     assert response.status_code == 200
     order = response.json()
@@ -48,8 +50,8 @@ def test_get_order_by_id():
     assert order['order_status'] == 'Order processed'
 
 
-def test_get_order_for_unknown_id():
+def test_get_order_for_unknown_id(): # noqa
     order_number = 9999
     response = client.get('/orders/%i' % order_number)
     assert response.status_code == 404
-    assert response.json() == {'message': 'No order found with number: #%i' % order_number}
+    assert response.json() == {'message': 'No order found with number: #%i' % order_number} # noqa

@@ -1,23 +1,30 @@
-"""backend.csv_importer"""
+"""lhb-backend.src.cmd.csv_importer."""
 import logging
 import csv
 import os
 import typer
 
-from ..database import engine, SessionLocal, models
+from ..database import engine, SessionLocal, models, Base
 
-DATA_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'data'))
+DATA_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__),
+                                         '..', '..', '..', 'data'))
 
 logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 
 logger = logging.getLogger(__name__)
 
-models.Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(bind=engine)
 
 
-def import_csvs():
+def import_csvs() -> None:
+    """Map CSV data to DB models.
+
+    Reads CSV files 'campaigns' & 'recipients', maps each line to
+    the corresponding model and persists the data.
+    """
     db = SessionLocal()
     campaigns = []
     recipients = []
