@@ -35,7 +35,7 @@ lint: ensure-poetry mypy
 autoformat: ensure-poetry lint
 	poetry run black src tests
 
-test: ensure-poetry lint
+test: ensure-poetry
 	poetry run pytest --cov src/ --strict tests
 
 clean:
@@ -54,7 +54,7 @@ install: ensure-poetry clean
 	poetry install --no-dev
 
 run: ensure-poetry clean
-	poetry run  uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
+	poetry run uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
 
 docker-image:
 	docker build -t lhb-backend:0.1.0 . --no-cache

@@ -3,6 +3,7 @@ import logging
 import csv
 import os
 import typer
+from sqlalchemy.orm import Session
 
 from ..database import engine, SessionLocal, models, Base
 
@@ -16,8 +17,6 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-Base.metadata.create_all(bind=engine)
-
 
 def import_csvs() -> None:
     """Map CSV data to DB models.
@@ -25,7 +24,12 @@ def import_csvs() -> None:
     Reads CSV files 'campaigns' & 'recipients', maps each line to
     the corresponding model and persists the data.
     """
-    db = SessionLocal()
+    # Drop tables in DB for a fresh start
+    logger.info('Drop tables in DB if they exist')
+    Base.metadata.drop_all(bind=engine)
+    Base.metadata.create_all(bind=engine)
+    # Now import the CSV data
+    db: Session = SessionLocal()
     campaigns = []
     recipients = []
     with open(os.path.join(DATA_DIR, 'campaigns.csv')) as campaigns_file, \
