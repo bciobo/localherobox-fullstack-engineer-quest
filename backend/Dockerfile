@@ -10,6 +10,11 @@ RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
 
 FROM python:3.10
 
+WORKDIR /
+
+RUN mkdir -p /data
+COPY ../data /data
+
 WORKDIR /code
 
 COPY --from=requirements-stage /tmp/requirements.txt /code/requirements.txt
@@ -18,4 +23,7 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 COPY src /code/app
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0"]
+COPY start.sh /code/start.sh
+RUN chmod +x /code/start.sh
+
+CMD ["/code/start.sh"]
