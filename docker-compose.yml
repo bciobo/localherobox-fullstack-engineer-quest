@@ -6,15 +6,13 @@ services:
     image: postgres:latest
     restart: always
     volumes:
-      - ./docker/postgres-setup:/docker-entrypoint-initdb.d
+      - db-data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: example
       POSTGRES_DB: lhb
     ports:
       - 5432:5432
-    networks:
-      - external
 
   backend:
     build: ./backend/
@@ -27,10 +25,7 @@ services:
       - POSTGRES_DB=lhb
     ports:
       - 8000:8000
-    networks:
-      - external
 
-
-networks:
-  external:
-    external: true
+volumes:
+  db-data:
+    name: lhb-db-data
