@@ -7,11 +7,15 @@ from sqlalchemy.orm import sessionmaker
 
 POSTGRES_USER = os.getenv('POSTGRES_USER', 'postgres')
 POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD', 'example')
+POSTGRES_SERVER = os.getenv('POSTGRES_SERVER', 'db')
+POSTGRES_PORT = os.getenv('POSTGRES_PORT', '5432')
 POSTGRES_DB = os.getenv('POSTGRES_DB', 'lhb')
 
-SQLALCHEMY_DATABASE_URL = 'postgresql://{}:{}@localhost:5432/{}'.format(
+SQLALCHEMY_DATABASE_URL = 'postgresql://{}:{}@{}:{}/{}'.format(
     POSTGRES_USER,
     POSTGRES_PASSWORD,
+    POSTGRES_SERVER,
+    POSTGRES_PORT,
     POSTGRES_DB,
 )
 
