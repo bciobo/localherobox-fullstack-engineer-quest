@@ -1,5 +1,4 @@
 import typing as t
-from pprint import pprint as pp
 
 from fastapi import Depends
 from fastapi import APIRouter
@@ -17,9 +16,7 @@ async def orders(email: str | None = None,
                  db: Session = Depends(get_db)) -> t.Any:
     if email:
         return get_recipients_by_email(db, email=email)
-    recs = get_recipients(db)
-    pp(recs)
-    return recs
+    return get_recipients(db)
 
 
 @router.get("/{order_id}", response_model=RecipientWithCampaigns)
