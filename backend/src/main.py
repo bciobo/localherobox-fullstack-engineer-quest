@@ -1,9 +1,15 @@
-import typing as t
+"""lhb-backend.src.main."""
 from fastapi import FastAPI
 
-app = FastAPI()
+from .api import router
+from . import config
 
 
-@app.get("/")
-async def root() -> t.Dict[str, str]:
-    return {"message": "Hello World"}
+def init_app() -> FastAPI:
+    """Init application"""
+    application = FastAPI()
+    application.include_router(router, prefix=config.API_PREFIX)
+    return application
+
+
+app = init_app()
