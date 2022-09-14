@@ -1,7 +1,7 @@
 """lhb-backend.src.main."""
 from fastapi import FastAPI
 
-from .api import router
+from .api.v1.router import api_router as router
 from . import config
 
 

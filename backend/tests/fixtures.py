@@ -6,7 +6,7 @@ from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
 from ..src.main import init_app
-from ..src.database import Base
+from ..src.database.session import Base
 from ..src.api.dependencies import get_db
 from .config import engine, TestingSessionLocal
 
@@ -22,7 +22,8 @@ def app() -> t.Generator[FastAPI, t.Any, None]:
 
 @pytest.fixture
 def session(app: FastAPI) -> t.Generator[Session, t.Any, None]:
-    """
+    """Create FastAPI app fixture.
+
     Creates a fresh sqlalchemy session for each test that operates in a
     transaction. The transaction is rolled back at the end of each test ensuring
     a clean state.
@@ -44,8 +45,9 @@ def session(app: FastAPI) -> t.Generator[Session, t.Any, None]:
 
 @pytest.fixture
 def client(app: FastAPI, session: Session) -> t.Generator[TestClient, t.Any, None]:
-    """
-    Create a new FastAPI TestClient that uses the `session` fixture to override
+    """Create a new FastAPI TestClient.
+
+    This fixture uses the `session` fixture to override
     the `get_db` dependency that is injected into routes.
     """
 

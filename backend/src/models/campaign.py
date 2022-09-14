@@ -1,7 +1,7 @@
 """lhb-backend.src.models.campaign."""
 from sqlalchemy import Column, Integer, String
 
-from ..database import Base
+from ..database.session import Base
 
 
 class Campaign(Base):  # type: ignore

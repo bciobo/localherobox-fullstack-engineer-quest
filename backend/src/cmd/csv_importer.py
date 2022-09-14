@@ -5,7 +5,7 @@ import os
 import typer
 from sqlalchemy.orm import Session
 
-from ..database import engine, SessionLocal, Base
+from ..database.session import engine, SessionLocal, Base
 from ..models.campaign import Campaign
 from ..models.recipient import Recipient
 

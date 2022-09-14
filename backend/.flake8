@@ -1,3 +1,17 @@
 [flake8]
-max-line-length = 88
+max-line-length = 120
 exclude = .git,__pycache__,__init__.py,.mypy_cache,.pytest_cache
+ignore =
+    # F401 imported but unused
+    F401
+    # D100 missing docstring in public module
+    D100
+    # D400 First line should end with a period
+    D400
+    # D101 Missing docstring in public class
+    D101
+    # D106 Missing docstring in public nested class
+    D106
+    # D103 Missing docstring in public function
+    D103
+    F811

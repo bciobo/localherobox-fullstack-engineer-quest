@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from ..src.models import Recipient
+from ..src.models.recipient import Recipient
 
 
 def create_recipient(db: Session, i=''):

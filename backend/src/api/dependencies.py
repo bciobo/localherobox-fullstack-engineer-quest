@@ -1,7 +1,7 @@
 import typing as t
 from sqlalchemy.orm import Session
 
-from ..database import SessionLocal
+from ..database.session import SessionLocal
 
 
 def get_db() -> t.Generator[Session, t.Any, None]:

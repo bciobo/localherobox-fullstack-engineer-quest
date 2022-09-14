@@ -1,6 +1,6 @@
 """lhb-backend.src.models.recipient."""
 from sqlalchemy import Column, Integer, String
-from ..database import Base
+from ..database.session import Base
 
 
 class Recipient(Base):  # type: ignore
