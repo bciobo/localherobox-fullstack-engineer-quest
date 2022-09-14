@@ -5,7 +5,9 @@ import os
 import typer
 from sqlalchemy.orm import Session
 
-from ..database import engine, SessionLocal, models, Base
+from ..database import engine, SessionLocal, Base
+from ..models.campaign import Campaign
+from ..models.recipient import Recipient
 
 DATA_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__),
                                          '..', '..', '..', 'data'))
@@ -39,7 +41,7 @@ def import_csvs() -> None:
         campaigns_csv = csv.DictReader(campaigns_file, delimiter=';')
         for line in campaigns_csv:
             campaigns.append(
-                models.Campaign(
+                Campaign(
                     campaign_id=line['campaignId'],
                     article_no=line['articleNo'],
                     article_image_url=line['articleImageUrl'],
@@ -53,7 +55,7 @@ def import_csvs() -> None:
         recipients_csv = csv.DictReader(recipients_file, delimiter=';')
         for line in recipients_csv:
             recipients.append(
-                models.Recipient(
+                Recipient(
                     order_number=line['orderNo'],
                     street=line['street'],
                     zip_code=line['zip_code'],

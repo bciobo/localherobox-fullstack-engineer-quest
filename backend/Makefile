@@ -1,5 +1,6 @@
-.PHONY: test mypy lint clean dev install dist run docker-image start-db import-csv help
+.PHONY: test mypy lint clean dev install dist run backend-image start-db import-csv help
 
+PYTHONPATH=$(${PWD%/*})
 
 help:
 	@echo
@@ -12,7 +13,7 @@ help:
 	@echo "  install       install without dev dependencies"
 	@echo "  dist          build dist packages"
 	@echo "  run           run server for development"
-	@echo "  docker-image  build Docker image"
+	@echo "  backend-image build Docker image for backend"
 	@echo "  start-db      run PostgreSQL in a Docker container"
 	@echo "  import-csv    import csv data into db"
 	@echo "  help          print this message"
@@ -54,9 +55,10 @@ install: ensure-poetry clean
 	poetry install --no-dev
 
 run: ensure-poetry clean
+	export PYTHONPATH=$${PWD%/*}; \
 	poetry run uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
 
-docker-image:
+docker-backend-image:
 	docker build -t lhb-backend:0.1.0 . --no-cache
 
 start-db:

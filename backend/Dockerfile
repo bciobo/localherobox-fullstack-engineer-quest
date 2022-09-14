@@ -10,18 +10,19 @@ RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
 
 FROM python:3.10
 
-WORKDIR /
+WORKDIR /code
 
 RUN mkdir -p /data
-COPY ../data /data
-
-WORKDIR /code
+COPY ../data /code/data
 
 COPY --from=requirements-stage /tmp/requirements.txt /code/requirements.txt
 
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
-COPY src /code/app
+RUN mkdir -p /code/backend
+RUN touch /code/backend/__init__.py
+COPY src /code/backend/src
+ENV PYTHONPATH=/code
 
 COPY start.sh /code/start.sh
 RUN chmod +x /code/start.sh
