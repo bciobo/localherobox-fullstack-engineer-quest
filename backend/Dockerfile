@@ -12,10 +12,19 @@ FROM python:3.10
 
 WORKDIR /code
 
+RUN mkdir -p /data
+COPY ../data /code/data
+
 COPY --from=requirements-stage /tmp/requirements.txt /code/requirements.txt
 
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
-COPY src /code/app
+RUN mkdir -p /code/backend
+RUN touch /code/backend/__init__.py
+COPY src /code/backend/src
+ENV PYTHONPATH=/code
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0"]
+COPY start.sh /code/start.sh
+RUN chmod +x /code/start.sh
+
+CMD ["/code/start.sh"]

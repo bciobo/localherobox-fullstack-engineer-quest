@@ -24,11 +24,14 @@ __pycache__
 # Unit test / coverage reports
 .coverage
 
+# Docker
+docker
 
 # Frontend
 
 # dependencies
 frontend/node_modules
+backend/.pytest_cache
 frontend/.pnp
 .pnp.js
 
@@ -51,6 +54,6 @@ yarn-error.log*
 
 
 # Backend
-
-# store
-backend/store/database.db
+/backend/test.db
+backend/.mypy_cache
+/backend/tests/test.db

@@ -23,14 +23,6 @@
 
 `pip install poetry` 
 
-## Build
-
-Run docker build command:
-
-```commandline
-docker build -t lhb-backend:0.1.0 . --no-cache
-```
-
 ## Lint
 Activate virtual environment `source .env/bin/activate`.
 
@@ -40,7 +32,6 @@ Uses `mypy` to check type hints and `flake8` to check code style and existence o
 make lint
 ```
 ## Test
-
 Activate virtual environment `source .env/bin/activate`.
 
 Run with: 
@@ -49,17 +40,11 @@ Run with:
 make test
 ```
 ## Run
+Activate virtual environment `source .env/bin/activate`.
 
 Run in development mode:
 
 ```commandline
+make start-db
 make run
 ```
-
-or using Docker, to start just the Python backend using the image built before (see step #Build):
-
-````commandline
-docker run -p 8000:8000 --name lhb-backend lhb-backend:0.1.0
-````
-
-ADD MORE INFO AS NECESSARY
